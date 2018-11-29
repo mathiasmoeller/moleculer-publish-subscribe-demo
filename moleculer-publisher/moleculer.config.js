@@ -48,8 +48,8 @@ module.exports = {
 
 	// Called after broker started.
 	started(broker) {
+    broker.logger.info('Starting to send test events');
 		setInterval(() => {
-			broker.logger.info('Sending test event');
       broker.emit('test.event', {data: 'this is test data'});
 		}, 2000);
 	},
