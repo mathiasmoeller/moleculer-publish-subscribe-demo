@@ -1,0 +1,50 @@
+version: "3.0"
+
+services:
+
+  moleculer-publisher:
+    container_name: moleculer-publisher
+    build:
+      context: moleculer-publisher/
+    image: moleculer-publisher
+    ports:
+      - 3001:3000
+    environment:
+      PORT: 3000
+      NATS_URL: nats://nats-server:4222
+    depends_on:
+      - nats-server
+
+#  moleculer-subscriber:
+#    container_name: moleculer-subscriber
+#    build:
+#      context: moleculer-subscriber/
+#    image: moleculer-subscriber
+#    ports:
+#      - 3003:3002
+#    environment:
+#      PORT: 3002
+#      NATS_URL: nats://nats-server:4222
+#    depends_on:
+#      - nats-server
+
+  nodejs-subscriber:
+    container_name: nodejs-subscriber
+    build:
+      context: nodejs-subscriber/
+    image: nodejs-subscriber
+    environment:
+      NATS_URL: nats://nats-server:4222
+    depends_on:
+      - nats-server
+
+  nats-server:
+    container_name: nats-server
+    hostname: nats-server
+    image: 'nats:0.8.0'
+    entrypoint: "/gnatsd -D -m 8222"
+    expose:
+      - "4222"
+    ports:
+      - "4222:4222"
+      - "8222:8222"

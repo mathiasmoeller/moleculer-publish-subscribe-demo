@@ -1,0 +1,20 @@
+{
+  "name": "test-subscriber",
+  "version": "1.0.0",
+  "description": "test",
+  "license": "MIT",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [
+    "microservices",
+    "moleculer"
+  ],
+  "author": "Mathias Möller",
+  "dependencies": {
+    "nats": "^1.0.0"
+  },
+  "engines": {
+    "node": ">= 8.x.x"
+  }
+}
